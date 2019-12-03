@@ -4,6 +4,7 @@ $(function () {
     var pid = searchParams.get("pid");
     var url = "/api/products/" + pid;
 
+    
     // Get data when first time open
     getData();
 
