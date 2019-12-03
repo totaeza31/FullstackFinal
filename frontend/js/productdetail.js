@@ -11,6 +11,10 @@ $(function () {
         // #14 Get a selected product and display as a form
         // use $.get
 
+        $.get("demo_test.asp", function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+          });
+    
         // ===============================
     }
 
@@ -47,8 +51,29 @@ $(function () {
     });
 
     $("#confirmdelete").click(function () {
-        // #15 Get a selected product and go back to product list
+        // #15 Delete a selected product and go back to product list
         // use $.get and winidow.location.href
+
+        var deleteproduct = {
+            serialno: $("#serialno").val(),
+            name: $("#name").val(),
+            category: $("#category").val(),
+            price: $("#price").val(),
+            photo: $("#photo").val()
+        }
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            data: deleteproduct,
+            success: function (result) {
+                //Show updated status
+                $("#modalbody").text("DELETE product " + pid);
+                $('#alertModal').modal('toggle');
+                // Refresh data
+                getData();
+            }
+        });
+        window.location(href = 'http://www.localhost:8080/api/products');
 
         // ===============================
     });

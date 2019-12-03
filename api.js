@@ -19,28 +19,48 @@ function getAllProducts(req, res) {
 function getProductById(req, res) {
     var pid = req.params.pid;    
     // #6 Get a product by ID
+        Product.find({"_id":pid},function(err, products) {
+            if (err) res.status(500).json(err);
+                 res.json(products);
+        });
+        
 
     // ===============================
 }
 
 function updateProductById(req, res) {
-    var payload = req.body
+    var payload = req.body;
     var pid = req.params.pid;    
     // #7 Update a product by ID (findByIdAndUpdate)
 
+         Product.findByIdAndUpdate(pid,payload,function(err){
+             if(err) res.status(500).json(err);
+             res.json({status:"Updated a product"});
+         }); 
     // ===============================
 }
 
 function deleteProductById(req, res) {
     var pid = req.params.pid;    
     // #8 Delete a product by ID (findByIdAndDelete)
-
+ 
+         Product.findByIdAndRemove(pid,function(err){
+             if(err) res.status(500).json(err);
+             res.json({status:"delect a product"});
+         });
+      
     // ===============================
 }
 
 function addProduct(req, res) {
-    var payload = req.body
+    var payload = req.body;
     // #9 Add a new product 
+        //insert data to mongodb
+        var product = new Product(payload);
+        product.save(function(err){
+            if(err)  res.status(500).json(err);
+            res.json({status: "Added a product"});
+                    });
 
     // ===============================
 }

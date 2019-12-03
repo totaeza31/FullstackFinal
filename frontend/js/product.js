@@ -10,11 +10,10 @@ $(function () {
         // #12 Get all products and display as a table
         // use $.get
         
-        $("button").click(function(){
             $.get("demo_test.asp", function(data, status){
               alert("Data: " + data + "\nStatus: " + status);
             });
-          });
+      
         // ===============================
     }
     
