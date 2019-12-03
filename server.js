@@ -10,7 +10,6 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 // ===============================
 
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(cors());
@@ -18,12 +17,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // #3 Serve static content in folder frontend
-
+    app.get('/', function (req, res) {
+    res.send('Express is running');
+    });
 // ===============================
-
-
 var port = process.env.PORT || 8080;
-
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
@@ -33,7 +31,6 @@ router.get('/products', products.getAllProducts);
 router.get('/products/:pid', products.getProductById);
 
 // #4 Complete the routing for POST, PUT, DELETE
-
 
 //Product apis
 app.post('/api/products', function (req, res) {
