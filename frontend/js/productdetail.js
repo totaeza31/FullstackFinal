@@ -10,9 +10,9 @@ $(function () {
     function getData() {
         // #14 Get a selected product and display as a form
         // use $.get
-
-        $.get("demo_test.asp", function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
+        $("plist").empty();
+        $.get("/api/products/", pid,{editproduct},function(result){
+            $("span").html(result);
           });
     
         // ===============================

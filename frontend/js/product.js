@@ -35,8 +35,7 @@ $(function () {
         // #13 Add new products by calling api
         // use $.post
           $("input").keyup(function(){
-             var txt =$("input").val();
-             $.post("demo_ajax_gethint.asp",{suggest:txt},function(result){
+             $.post(url,{newproduct},function(result){
             $("span").html(result);
              });
           });
