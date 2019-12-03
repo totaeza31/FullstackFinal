@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 // #3 Serve static content in folder frontend
     app.get('/', function (req, res) {
-    res.send('Express is running');
+       res.render('index');
     });
 // ===============================
 var port = process.env.PORT || 8080;
@@ -31,34 +31,14 @@ router.get('/products', products.getAllProducts);
 router.get('/products/:pid', products.getProductById);
 
 // #4 Complete the routing for POST, PUT, DELETE
-
+var router = express.Router();
+var products = require('./api');
+router.get('/products',products.getAllProducts);
+router.get('/products/:pid',products.getProductById);
+router.post('/products/:pid',products.addProduct);
+router.put('/products/:pid',products.updateProductById);
+router.delete('/products/:pid',products.deleteProductById);
 //Product apis
-app.post('/api/products', function (req, res) {
-    //insert data to mongodb
-    var newproduct = req.body;
-    var product = new Product(newproduct);
-    product.save(function (err) {
-        if (err) res.status(500).json(err);
-        res.json({ status: "Added a product" });
-    });
-});
-
-app.put('/api/products/:id', function (req, res) {
-    var upadateproduct = req.body;
-    var id = req.param.id;
-    Product.findByIdAndUpdate(id, upadateproduct, function (err) {
-        if (err) res.status(500).json(err);
-        res.json({ status: "Updated a product" });
-    });
-});
-
-app.delete('/api/products/:id', function (req, res) {
-    var id = req.param.id;
-    Product.findByIdAndRemove(id, function (err) {
-        if (err) res.status(500).json(err);
-        res.json({ status: "delect a product" });
-    });
-});
 // ===============================
 
 
@@ -67,6 +47,7 @@ app.delete('/api/products/:id', function (req, res) {
 app.use('/api', cors(), router);
 
 // #10 Start the server
-var port = process.env.PORT || 8080;
-// ===============================
-console.log('Magic happens on http://localhost:' + port);
+
+app.listen(port, function () {
+console.log('App is running on http://localhost:' + port);
+});
