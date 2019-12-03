@@ -9,7 +9,12 @@ $(function () {
         $("#plist").empty();
         // #12 Get all products and display as a table
         // use $.get
-
+        
+        $("button").click(function(){
+            $.get("demo_test.asp", function(data, status){
+              alert("Data: " + data + "\nStatus: " + status);
+            });
+          });
         // ===============================
     }
     
@@ -30,7 +35,12 @@ $(function () {
 
         // #13 Add new products by calling api
         // use $.post
-
+          $("input").keyup(function(){
+             var txt =$("input").val();
+             $.post("demo_ajax_gethint.asp",{suggest:txt},function(result){
+            $("span").html(result);
+             });
+          });
         // ===============================
 
     });

@@ -17,9 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // #3 Serve static content in folder frontend
-    app.get('/', function (req, res) {
-       res.render('index');
-    });
+   
+     app.use(express.static('frontend'));
+   
 // ===============================
 var port = process.env.PORT || 8080;
 // ROUTES FOR OUR API
@@ -41,13 +41,11 @@ router.delete('/products/:pid',products.deleteProductById);
 //Product apis
 // ===============================
 
-
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', cors(), router);
 
 // #10 Start the server
-
 app.listen(port, function () {
 console.log('App is running on http://localhost:' + port);
 });
